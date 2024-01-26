@@ -3,12 +3,17 @@ import { cadastrarUsuario, detalharPerfil, editarPerfil } from './controladores/
 import { login } from './controladores/login'
 import { listarCategorias } from './controladores/categorias'
 import { validarToken } from './intermediarios/validarToken'
+import { validarCorpoRequisicao } from './intermediarios/validarCampo'
+import { verificarLogin } from './schemas/loginSchema'
+import { verificarCadastroUsuario } from './schemas/usuarioSchema'
+import { validarCadastroProduto } from './schemas/produtoSchema'
+import { cadastrarProduto } from './controladores/produtos'
 
 const rotas = Router()
 
-rotas.post('/login', login)
+rotas.post('/login', validarCorpoRequisicao(verificarLogin), login)
 
-rotas.post('/usuario', cadastrarUsuario)
+rotas.post('/usuario', validarCorpoRequisicao(verificarCadastroUsuario), cadastrarUsuario)
 
 rotas.get('/categoria', listarCategorias)
 
@@ -17,6 +22,8 @@ rotas.use(validarToken)
 rotas.get('/usuario', detalharPerfil)
 
 rotas.put('/usuario', editarPerfil)
+
+rotas.post('/produto', validarCorpoRequisicao(validarCadastroProduto), cadastrarProduto)
 
 
 
