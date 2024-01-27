@@ -41,3 +41,25 @@ export const atualizarProduto = async (req: Request, res: Response) => {
         return res.status(500).json({ mensagem: "Erro interno do servidor." })
     }
 }
+
+export const listarProdutos = async (req: Request, res: Response) => {
+    const { categoria_id } = req.query
+
+    try {
+        let listarProdutos;
+
+        if (categoria_id) {
+            listarProdutos = await knex('produtos').where({ categoria_id })
+
+            if (listarProdutos.length === 0) {
+                return res.status(404).json({ mensagem: "Nenhum produto encontrado nesta categoria." })
+            }
+        } else {
+            listarProdutos = await knex('produtos')
+        }
+
+        return res.status(200).json(listarProdutos)
+    } catch (error) {
+        return res.status(500).json({ mensagem: "Erro interno do servidor." })
+    }
+}
