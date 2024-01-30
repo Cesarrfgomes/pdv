@@ -7,7 +7,7 @@ import { validarCorpoRequisicao } from './intermediarios/validarCampo'
 import { verificarLogin } from './schemas/loginSchema'
 import { verificarCadastroUsuario } from './schemas/usuarioSchema'
 import { validarCadastroProduto } from './schemas/produtoSchema'
-import { atualizarProduto, cadastrarProduto, listarProdutos } from './controladores/produtos'
+import { atualizarProduto, cadastrarProduto, detalharProduto, listarProdutos } from './controladores/produtos'
 
 const rotas = Router()
 
@@ -28,6 +28,8 @@ rotas.post('/produto', validarCorpoRequisicao(validarCadastroProduto), cadastrar
 rotas.put('/produto/:id', validarCorpoRequisicao(validarCadastroProduto), atualizarProduto)
 
 rotas.get('/produto', listarProdutos)
+
+rotas.get('/produto/:id', detalharProduto)
 
 
 
