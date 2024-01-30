@@ -31,7 +31,7 @@ rotas.get('/produto', listarProdutos)
 
 rotas.get('/produto/:id', detalharProduto)
 
-rotas.delete('produto/:id', excluirProduto)
+rotas.delete('/produto/:id', excluirProduto)
 
 
 
