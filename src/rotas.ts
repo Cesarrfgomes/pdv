@@ -7,7 +7,7 @@ import { validarCorpoRequisicao } from './intermediarios/validarCampo'
 import { verificarLogin } from './schemas/loginSchema'
 import { verificarCadastroUsuario } from './schemas/usuarioSchema'
 import { validarCadastroProduto } from './schemas/produtoSchema'
-import { atualizarProduto, cadastrarProduto, detalharProduto, listarProdutos } from './controladores/produtos'
+import { atualizarProduto, cadastrarProduto, detalharProduto, excluirProduto, listarProdutos } from './controladores/produtos'
 
 const rotas = Router()
 
@@ -30,6 +30,8 @@ rotas.put('/produto/:id', validarCorpoRequisicao(validarCadastroProduto), atuali
 rotas.get('/produto', listarProdutos)
 
 rotas.get('/produto/:id', detalharProduto)
+
+rotas.delete('produto/:id', excluirProduto)
 
 
 
