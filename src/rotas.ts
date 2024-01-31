@@ -12,6 +12,8 @@ import { cadastrarCliente, detalharCliente, editarCliente, listarClientes } from
 import { validarCadastroCliente } from './schemas/clienteSchema'
 import { validarEmail, validarEmailEmUso } from './intermediarios/validarEmail'
 import { validarCpf, validarCpfEmUso } from './intermediarios/validarCpf'
+import { cadastrarPedido } from './controladores/pedidos'
+import { validarCadastroPedido } from './schemas/pedidoSchema'
 
 const rotas = Router()
 
@@ -44,5 +46,7 @@ rotas.put('/cliente/:id', validarEmailEmUso, validarCpfEmUso, validarCorpoRequis
 rotas.get('/cliente', listarClientes)
 
 rotas.get('/cliente/:id', detalharCliente)
+
+rotas.post('/pedido', validarCorpoRequisicao(validarCadastroPedido), cadastrarPedido)
 
 export default rotas
