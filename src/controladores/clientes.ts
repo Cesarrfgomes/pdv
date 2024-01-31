@@ -30,3 +30,13 @@ export const editarCliente = async (req: Request, res: Response) => {
         return res.status(500).json({ mensagem: "Erron interno do servidor." })
     }
 }
+
+export const listarClientes = async (req: Request, res: Response) => {
+    try {
+        const listarClientes = await knex('clientes')
+
+        return res.status(200).json(listarClientes)
+    } catch (error) {
+        return res.status(500).json({ mensagem: "Erro interno do servidor." })
+    }
+}

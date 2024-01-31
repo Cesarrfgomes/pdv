@@ -8,7 +8,7 @@ import { verificarLogin } from './schemas/loginSchema'
 import { verificarCadastroUsuario } from './schemas/usuarioSchema'
 import { validarCadastroProduto } from './schemas/produtoSchema'
 import { atualizarProduto, cadastrarProduto, detalharProduto, excluirProduto, listarProdutos } from './controladores/produtos'
-import { cadastrarCliente, editarCliente } from './controladores/clientes'
+import { cadastrarCliente, editarCliente, listarClientes } from './controladores/clientes'
 import { validarCadastroCliente } from './schemas/clienteSchema'
 import { validarEmail, validarEmailEmUso } from './intermediarios/validarEmail'
 import { validarCpf, validarCpfEmUso } from './intermediarios/validarCpf'
@@ -41,6 +41,6 @@ rotas.post('/cliente', validarEmail, validarCpf, validarCorpoRequisicao(validarC
 
 rotas.put('/cliente/:id', validarEmailEmUso, validarCpfEmUso, validarCorpoRequisicao(validarCadastroCliente), editarCliente)
 
-
+rotas.get('/cliente', listarClientes)
 
 export default rotas
