@@ -8,10 +8,10 @@ import { verificarLogin } from './schemas/loginSchema'
 import { verificarCadastroUsuario } from './schemas/usuarioSchema'
 import { validarCadastroProduto } from './schemas/produtoSchema'
 import { atualizarProduto, cadastrarProduto, detalharProduto, excluirProduto, listarProdutos } from './controladores/produtos'
-import { cadastrarCliente } from './controladores/clientes'
+import { cadastrarCliente, editarCliente } from './controladores/clientes'
 import { validarCadastroCliente } from './schemas/clienteSchema'
-import { validarEmail } from './intermediarios/validarEmail'
-import { validarCpf } from './intermediarios/validarCpf'
+import { validarEmail, validarEmailEmUso } from './intermediarios/validarEmail'
+import { validarCpf, validarCpfEmUso } from './intermediarios/validarCpf'
 
 const rotas = Router()
 
@@ -38,6 +38,8 @@ rotas.get('/produto/:id', detalharProduto)
 rotas.delete('/produto/:id', excluirProduto)
 
 rotas.post('/cliente', validarEmail, validarCpf, validarCorpoRequisicao(validarCadastroCliente), cadastrarCliente)
+
+rotas.put('/cliente/:id', validarEmailEmUso, validarCpfEmUso, validarCorpoRequisicao(validarCadastroCliente), editarCliente)
 
 
 
