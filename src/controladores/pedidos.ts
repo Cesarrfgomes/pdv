@@ -62,3 +62,36 @@ export const cadastrarPedido = async (req: Request, res: Response) => {
         return res.status(500).json({ mensagem: "Erro interno do servidor." })
     }
 }
+
+export const listarPedidos = async (req: Request, res: Response) => {
+    const { cliente_id } = req.query;
+
+    try {
+        let pedidos = [];
+
+        if (cliente_id) {
+            const clienteExiste = await knex('clientes').where({ id: cliente_id }).first();
+
+            if (!clienteExiste) {
+                return res.status(404).json({ mensagem: 'Cliente não encontrado!' });
+            }
+
+            pedidos = await knex('pedidos').where({ cliente_id });
+        } else {
+            pedidos = await knex('pedidos');
+        }
+
+        const resultado = [];
+
+        for (const pedido of pedidos) {
+            const produtosPedido = await knex('pedido_produtos')
+                .where('pedido_produtos.pedido_id', pedido.id);
+
+            resultado.push({ pedido, pedido_produtos: produtosPedido });
+        }
+
+        return res.status(200).json(resultado);
+    } catch (error) {
+        return res.status(500).json({ mensagem: 'Erro interno no servidor.' });
+    }
+}
