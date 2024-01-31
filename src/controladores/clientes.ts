@@ -40,3 +40,18 @@ export const listarClientes = async (req: Request, res: Response) => {
         return res.status(500).json({ mensagem: "Erro interno do servidor." })
     }
 }
+
+export const detalharCliente = async (req: Request, res: Response) => {
+    const { id } = req.params
+    try {
+        const detalharCliente = await knex('clientes').where({ id }).first()
+
+        if (!detalharCliente) {
+            return res.status(404).json({ mensagem: "Cliente não encontrado." })
+        }
+
+        return res.status(200).json(detalharCliente)
+    } catch (error) {
+        return res.status(500).json({ mensagem: "Erro interno do servidor." })
+    }
+}
