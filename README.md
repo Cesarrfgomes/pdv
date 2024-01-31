@@ -1,4 +1,4 @@
-# PDV - DESAFIO 05 CUBOS ACADEMY - B2BT08
+# PDV 
 
 PDV - É uma API RESTful desenvolvida com Node.js e Express 4 que através de operações CRUD, com persistência em banco de dados PostgresSQL responde requisições de transações em um modelo PDV.
 
