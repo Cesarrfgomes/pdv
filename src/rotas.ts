@@ -17,9 +17,9 @@ import { validarCadastroPedido } from './schemas/pedidoSchema'
 
 const rotas = Router()
 
-rotas.post('/login', validarEmail, validarCorpoRequisicao(verificarLogin), login)
+rotas.post('/login', validarCorpoRequisicao(verificarLogin), login)
 
-rotas.post('/usuario', validarCorpoRequisicao(verificarCadastroUsuario), cadastrarUsuario)
+rotas.post('/usuario', validarEmail('usuarios'), validarCorpoRequisicao(verificarCadastroUsuario), cadastrarUsuario)
 
 rotas.get('/categoria', listarCategorias)
 
@@ -27,7 +27,7 @@ rotas.use(validarToken)
 
 rotas.get('/usuario', detalharPerfil)
 
-rotas.put('/usuario', editarPerfil)
+rotas.put('/usuario', validarEmailEmUso('usuarios'), validarCorpoRequisicao(verificarCadastroUsuario), editarPerfil)
 
 rotas.post('/produto', validarCorpoRequisicao(validarCadastroProduto), cadastrarProduto)
 
@@ -39,9 +39,9 @@ rotas.get('/produto/:id', detalharProduto)
 
 rotas.delete('/produto/:id', excluirProduto)
 
-rotas.post('/cliente', validarEmail, validarCpf, validarCorpoRequisicao(validarCadastroCliente), cadastrarCliente)
+rotas.post('/cliente', validarEmail('clientes'), validarCpf, validarCorpoRequisicao(validarCadastroCliente), cadastrarCliente)
 
-rotas.put('/cliente/:id', validarEmailEmUso, validarCpfEmUso, validarCorpoRequisicao(validarCadastroCliente), editarCliente)
+rotas.put('/cliente/:id', validarEmailEmUso('clientes'), validarCpfEmUso, validarCorpoRequisicao(validarCadastroCliente), editarCliente)
 
 rotas.get('/cliente', listarClientes)
 
