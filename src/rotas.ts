@@ -17,7 +17,7 @@ import { validarCadastroPedido } from './schemas/pedidoSchema'
 
 const rotas = Router()
 
-rotas.post('/login', validarCorpoRequisicao(verificarLogin), login)
+rotas.post('/login', validarEmail, validarCorpoRequisicao(verificarLogin), login)
 
 rotas.post('/usuario', validarCorpoRequisicao(verificarCadastroUsuario), cadastrarUsuario)
 
