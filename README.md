@@ -139,9 +139,6 @@ Uso
 	  {
 		"descricao": "Mercado"
 	  }
-	  .
-	  .
-	  .
   	]
     ```
 
@@ -221,9 +218,6 @@ Uso
 		"categoria_id": 1,
 		"produto_imagem": null
 	  }
-	  .
-	  .
-	  .
 	]
 	
 	```
@@ -412,10 +406,7 @@ Uso
 			"valor_produto": 360000
 		  }
 		]
-	  },
-	  .
-	  .
-	  .
+	  }
 	]
 
 	```   
